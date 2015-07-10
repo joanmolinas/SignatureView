@@ -14,6 +14,11 @@
 		555427ED1B4C14FD006ABA04 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 555427EC1B4C14FD006ABA04 /* Images.xcassets */; };
 		555427F01B4C14FD006ABA04 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555427EE1B4C14FD006ABA04 /* LaunchScreen.xib */; };
 		555427FC1B4C14FD006ABA04 /* SignatureTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 555427FB1B4C14FD006ABA04 /* SignatureTests.m */; };
+		5554280B1B4D2BB2006ABA04 /* FreehandDrawingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5554280A1B4D2BB2006ABA04 /* FreehandDrawingLayer.m */; };
+		5554280E1B4D2C2E006ABA04 /* SignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5554280D1B4D2C2E006ABA04 /* SignatureView.m */; };
+		555428111B4D2C5B006ABA04 /* DecorationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 555428101B4D2C5B006ABA04 /* DecorationView.m */; };
+		555428141B4D2C96006ABA04 /* LinesDecorationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 555428131B4D2C96006ABA04 /* LinesDecorationLayer.m */; };
+		555428171B4D2D30006ABA04 /* FreehandDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 555428161B4D2D30006ABA04 /* FreehandDrawing.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +45,16 @@
 		555427F51B4C14FD006ABA04 /* SignatureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignatureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		555427FA1B4C14FD006ABA04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		555427FB1B4C14FD006ABA04 /* SignatureTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignatureTests.m; sourceTree = "<group>"; };
+		555428091B4D2BB2006ABA04 /* FreehandDrawingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreehandDrawingLayer.h; sourceTree = "<group>"; };
+		5554280A1B4D2BB2006ABA04 /* FreehandDrawingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreehandDrawingLayer.m; sourceTree = "<group>"; };
+		5554280C1B4D2C2E006ABA04 /* SignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignatureView.h; sourceTree = "<group>"; };
+		5554280D1B4D2C2E006ABA04 /* SignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignatureView.m; sourceTree = "<group>"; };
+		5554280F1B4D2C5B006ABA04 /* DecorationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecorationView.h; sourceTree = "<group>"; };
+		555428101B4D2C5B006ABA04 /* DecorationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DecorationView.m; sourceTree = "<group>"; };
+		555428121B4D2C96006ABA04 /* LinesDecorationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinesDecorationLayer.h; sourceTree = "<group>"; };
+		555428131B4D2C96006ABA04 /* LinesDecorationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinesDecorationLayer.m; sourceTree = "<group>"; };
+		555428151B4D2D30006ABA04 /* FreehandDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreehandDrawing.h; sourceTree = "<group>"; };
+		555428161B4D2D30006ABA04 /* FreehandDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreehandDrawing.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +100,7 @@
 				555427E41B4C14FD006ABA04 /* AppDelegate.m */,
 				555427E61B4C14FD006ABA04 /* ViewController.h */,
 				555427E71B4C14FD006ABA04 /* ViewController.m */,
+				555428081B4D2B7A006ABA04 /* DrawView */,
 				555427E91B4C14FD006ABA04 /* Main.storyboard */,
 				555427EC1B4C14FD006ABA04 /* Images.xcassets */,
 				555427EE1B4C14FD006ABA04 /* LaunchScreen.xib */,
@@ -117,6 +133,23 @@
 				555427FA1B4C14FD006ABA04 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		555428081B4D2B7A006ABA04 /* DrawView */ = {
+			isa = PBXGroup;
+			children = (
+				5554280C1B4D2C2E006ABA04 /* SignatureView.h */,
+				5554280D1B4D2C2E006ABA04 /* SignatureView.m */,
+				5554280F1B4D2C5B006ABA04 /* DecorationView.h */,
+				555428101B4D2C5B006ABA04 /* DecorationView.m */,
+				555428151B4D2D30006ABA04 /* FreehandDrawing.h */,
+				555428161B4D2D30006ABA04 /* FreehandDrawing.m */,
+				555428121B4D2C96006ABA04 /* LinesDecorationLayer.h */,
+				555428131B4D2C96006ABA04 /* LinesDecorationLayer.m */,
+				555428091B4D2BB2006ABA04 /* FreehandDrawingLayer.h */,
+				5554280A1B4D2BB2006ABA04 /* FreehandDrawingLayer.m */,
+			);
+			name = DrawView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,7 +253,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				555427E81B4C14FD006ABA04 /* ViewController.m in Sources */,
+				555428171B4D2D30006ABA04 /* FreehandDrawing.m in Sources */,
+				555428141B4D2C96006ABA04 /* LinesDecorationLayer.m in Sources */,
 				555427E51B4C14FD006ABA04 /* AppDelegate.m in Sources */,
+				5554280B1B4D2BB2006ABA04 /* FreehandDrawingLayer.m in Sources */,
+				555428111B4D2C5B006ABA04 /* DecorationView.m in Sources */,
+				5554280E1B4D2C2E006ABA04 /* SignatureView.m in Sources */,
 				555427E21B4C14FD006ABA04 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +388,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Signature/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -360,6 +399,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Signature/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

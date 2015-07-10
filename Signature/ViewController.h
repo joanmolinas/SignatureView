@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SignatureView.h"
 
 @interface ViewController : UIViewController
 
