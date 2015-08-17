@@ -7,7 +7,7 @@
 //
 
 #import "SignatureView.h"
-#import "FreehandDrawing.h"
+#import "FreehandDrawingView.h"
 
 @interface SignatureView ()
 
@@ -17,8 +17,8 @@
 
 - (UIImage *)getSignatureImage {
     for (UIView *v in self.subviews) {
-        if ([v class] == [FreehandDrawing class]) {
-            return [(FreehandDrawing *)v getSignatureImage];
+        if ([v class] == [FreehandDrawingView class]) {
+            return [(FreehandDrawingView *)v getSignatureImage];
         }
     }
     return nil;

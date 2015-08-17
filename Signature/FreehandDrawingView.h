@@ -1,5 +1,5 @@
 //
-//  FreehandDrawing.h
+//  FreehandDrawingView.h
 //  Signature
 //
 //  Created by Joan Molinas on 08/07/2015.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "FreehandDrawingLayer.h"
 
-@interface FreehandDrawing : UIView
+@interface FreehandDrawingView : UIView
 - (UIImage *)getSignatureImage;
 @end

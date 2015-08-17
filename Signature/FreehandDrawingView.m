@@ -1,20 +1,20 @@
 //
-//  FreehandDrawing.m
+//  FreehandDrawingView.m
 //  Signature
 //
 //  Created by Joan Molinas on 08/07/2015.
 //  Copyright (c) 2015 Joan Molinas. All rights reserved.
 //
 
-#import "FreehandDrawing.h"
+#import "FreehandDrawingView.h"
 
-@interface FreehandDrawing ()
+@interface FreehandDrawingView ()
 @property (nonatomic, strong) UIImage *buffer;
 @property (nonatomic, strong) UIColor *drawColor;
 @property (nonatomic, assign) CGPoint lastPoint;
 @end
 
-@implementation FreehandDrawing
+@implementation FreehandDrawingView
 
 + (Class)layerClass {
     return [FreehandDrawingLayer class];
@@ -31,7 +31,7 @@
 
 #pragma mark - Setups
 - (void)setupDrawColor {
-    self.drawColor = [FreehandDrawing drawColor];
+    self.drawColor = [FreehandDrawingView drawColor];
 }
 - (void)setupGestureRecognizers {
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
