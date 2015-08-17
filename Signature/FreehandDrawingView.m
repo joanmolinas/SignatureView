@@ -9,93 +9,89 @@
 #import "FreehandDrawingView.h"
 
 @interface FreehandDrawingView ()
-@property (nonatomic, strong) UIImage *buffer;
-@property (nonatomic, strong) UIColor *drawColor;
-@property (nonatomic, assign) CGPoint lastPoint;
+@property (nonatomic, strong) UIBezierPath *path;
+@property (nonatomic, assign) CGPoint previousPoint;
 @end
 
 @implementation FreehandDrawingView
 
-+ (Class)layerClass {
-    return [FreehandDrawingLayer class];
+#pragma mark - Class Methods
+
++ (NSInteger)lineWidth {
+    return 2;
 }
-+ (UIColor *)drawColor {
-    return [UIColor blackColor];
-}
-#pragma mark - init
+
+#pragma mark - Life cycle
+
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self setupGestureRecognizers];
-    [self setupDrawColor];
+    [self setupComponentsFromView];
 }
 
-#pragma mark - Setups
-- (void)setupDrawColor {
-    self.drawColor = [FreehandDrawingView drawColor];
-}
-- (void)setupGestureRecognizers {
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    panGesture.maximumNumberOfTouches = 1;
-    [self addGestureRecognizer:panGesture];
+- (void)drawRect:(CGRect)rect {
+    [[UIColor blackColor] setStroke];
+    [self.path stroke];
 }
 
-#pragma mark - Gesture actions
-- (void)handlePan:(UIPanGestureRecognizer *)sender {
-    CGPoint point = [sender locationInView:self];
-    switch (sender.state) {
-        case UIGestureRecognizerStateBegan:
-            [self startAtPoint:point];
-            break;
-        case UIGestureRecognizerStateChanged:
-            [self continueAtPoint:point];
-            break;
-        case UIGestureRecognizerStateEnded:
-            [self endAtPoint:point];
-            break;
-        case UIGestureRecognizerStateCancelled:
-            [self endAtPoint:point];
-            break;
-        default:
-            NSAssert(false, @"State not handled");
-            break;
-    }
-}
+#pragma mark - Private api
 
-- (UIImage *)drawLine:(CGPoint)a to:(CGPoint)b image:(UIImage *)imageBuffer {
-    CGSize size = self.bounds.size;
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+- (void)setupComponentsFromView {
+    self.previousPoint = CGPointZero;
+    UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc]
+                                       initWithTarget:self
+                                       action:@selector(gesture:)];
     
-    if (imageBuffer) {
-        [imageBuffer drawInRect:self.bounds];
+    gesture.maximumNumberOfTouches = gesture.minimumNumberOfTouches = 1;
+    [self addGestureRecognizer:gesture];
+}
+
+- (void)setupBezierPath {
+    self.path = [UIBezierPath bezierPath];
+    [self.path setLineWidth:[[self class] lineWidth]];
+}
+
+- (void)gesture:(UIGestureRecognizer *)sender {
+    CGPoint currentPoint = [sender locationInView:self];
+    CGPoint middlePoint = [self middlePointWithLastPoint:self.previousPoint toPoint:currentPoint];
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        if (self.path == nil) {
+            [self setupBezierPath];
+        }
+        [self.path moveToPoint:currentPoint];
+    } else if (sender.state == UIGestureRecognizerStateChanged) {
+        [self.path addQuadCurveToPoint:middlePoint controlPoint:self.previousPoint];
+    } else if (sender.state == UIGestureRecognizerStateEnded) {
+        if (self.delegate) {
+            [self.delegate freeHandDrawingViewDidFinishDrawing:self];
+        }
     }
     
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    [(FreehandDrawingLayer *)self.layer drawPointInContext:context from:a to:b color:[UIColor clearColor].CGColor];
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    self.previousPoint = currentPoint;
+    [self setNeedsDisplay];
+}
+
+- (CGPoint)middlePointWithLastPoint:(CGPoint)lastPoint toPoint:(CGPoint)toPoint {
+    return CGPointMake((lastPoint.x + toPoint.x) / 2.0f, (lastPoint.y + toPoint.y) / 2.0f);
+}
+
+#pragma mark - Public api
+
+- (void)removeSignature {
+    self.previousPoint = CGPointZero;
+    self.path = nil;
+    [self setNeedsDisplay];
+}
+
+- (UIImage *)signatureImage {
+    if (self.path == nil) {
+        return nil;
+    }
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0);
+    [self.path stroke];
+    UIImage *signatureImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
-    return image;
+    return signatureImage;
 }
 
-- (void)startAtPoint:(CGPoint)point {
-    self.lastPoint = point;
-}
-
-- (void)continueAtPoint:(CGPoint)point {
-    @autoreleasepool {
-        self.buffer = [self drawLine:self.lastPoint to:point image:self.buffer];
-        self.layer.contents = (id)self.buffer.CGImage;
-        self.lastPoint = point;
-    }
-}
-- (void)endAtPoint:(CGPoint)point {
-    self.lastPoint = CGPointZero;
-}
-
-#pragma mark - Get signature
-- (UIImage *)getSignatureImage {
-    return self.buffer;
-}
 @end

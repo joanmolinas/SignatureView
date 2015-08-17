@@ -7,8 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FreehandDrawingLayer.h"
+
+@class FreehandDrawingView;
+
+@protocol FreehandDrawingViewDelegate
+- (void)freeHandDrawingViewDidFinishDrawing:(FreehandDrawingView *)drawingView;
+@end
 
 @interface FreehandDrawingView : UIView
-- (UIImage *)getSignatureImage;
+
+@property (weak, nonatomic) id<FreehandDrawingViewDelegate> delegate;
+
+- (void)removeSignature;
+- (UIImage *)signatureImage;
 @end
