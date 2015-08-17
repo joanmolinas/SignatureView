@@ -13,5 +13,5 @@ s.author = { "Joan Molinas" => "joanmramon@gmail.com" }
 s.homepage = "https://github.com/ulidev/SignatureView"
 s.source = { :git => "https://github.com/ulidev/SignatureView.git", :tag => s.version.to_s }
 s.framework = "UIKit"
-s.source_files = "Signature/*.{h,m}"
+s.source_files = "FreehandDrawingView/*.{h,m}"
 end
