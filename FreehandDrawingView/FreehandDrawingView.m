@@ -80,15 +80,19 @@
 }
 
 - (UIImage *)signatureImage {
+    return [self signatureImageWithLineWidth:0];
+}
+
+- (UIImage *)signatureImageWithLineWidth:(CGFloat)lineWidth {
     if (self.path == nil) {
         return nil;
     }
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0);
+    self.path.lineWidth = lineWidth ?: [[UIScreen mainScreen] scale];
     [self.path stroke];
     UIImage *signatureImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return signatureImage;
 }
-
 
 @end

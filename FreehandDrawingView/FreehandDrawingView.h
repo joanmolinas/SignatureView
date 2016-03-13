@@ -16,4 +16,6 @@
 
 - (void)removeSignature;
 - (UIImage *)signatureImage;
+- (UIImage *)signatureImageWithLineWidth:(CGFloat)lineWidth;
+
 @end
